@@ -2,7 +2,7 @@
 
 import React from "react";
 import type { files_table, folders_table } from "~/server/db/schema";
-import { FileRow, FolderRow } from "./FileRow";
+import { FileRow, FolderRow } from "./file-row";
 import { Button } from "~/components/ui/button";
 import { ChevronRight, Upload } from "lucide-react";
 import Link from "next/link";
