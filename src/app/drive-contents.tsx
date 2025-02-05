@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React from "react";
 import type { files, folders } from "~/server/db/schema";
 import { FileRow, FolderRow } from "./FileRow";
 import { Button } from "~/components/ui/button";
@@ -10,25 +10,8 @@ import Link from "next/link";
 export default function DriveContents(props: {
   files: (typeof files.$inferSelect)[];
   folders: (typeof folders.$inferSelect)[];
+  parents: (typeof folders.$inferSelect)[];
 }) {
-  const breadcrumbs = [] as unknown[];
-  //useMemo(() => {
-  //   const breadcrumbs = [];
-  //   let currentId = currentFolder;
-
-  //   while (currentId !== 1) {
-  //     const folder = props.folders.find((folder) => folder.id === currentId);
-  //     if (folder) {
-  //       breadcrumbs.unshift(folder);
-  //       currentId = folder.parent ?? 1;
-  //     } else {
-  //       break;
-  //     }
-  //   }
-
-  //   return breadcrumbs;
-  // }, [currentFolder, props.folders]);
-
   const handleUpload = () => {
     alert("Upload functionality would be implemented here");
   };
@@ -40,11 +23,11 @@ export default function DriveContents(props: {
             <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
               My Drive
             </Link>
-            {breadcrumbs.map((folder) => (
+            {props.parents.map((folder) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
                 <Link
-                  href={`/f/${folders.id}`}
+                  href={`/f/${folder.id}`}
                   className="text-gray-300 hover:text-white"
                 >
                   {folder.name}
